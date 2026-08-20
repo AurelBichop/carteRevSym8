@@ -16,7 +16,8 @@ final class HomeController extends AbstractController
         $phpMd = $filesystem->readFile('../filesCards/php.md');
         
         //split chaque contenue de fichier par ***
-        $splitPhpMd = explode('***', $phpMd);
+        $separator = $this->getParameter('separator.string');
+        $splitPhpMd = explode($separator, $phpMd);
         
         //Tirage au sort
         $choiceCard = array_rand($splitPhpMd);
