@@ -12,6 +12,8 @@ final class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Filesystem $filesystem): Response
     {
+        //Créer un service pour la logique ci dessous
+
         //Recuperer les fichier .md
         $phpMd = $filesystem->readFile('../filesCards/php.md');
         
@@ -22,6 +24,8 @@ final class HomeController extends AbstractController
         //Tirage au sort
         $choiceCard = array_rand($splitPhpMd);
  
+        //***** */
+
         return $this->render('home/index.html.twig', [
             'card' => $splitPhpMd[$choiceCard],
         ]);
