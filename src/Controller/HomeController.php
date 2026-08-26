@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -14,6 +15,7 @@ final class HomeController extends AbstractController
         //Créer un service pour la logique ci dessous
 
         //Recuperer les fichier .md
+        //$phpMd = $filesystem->readFile('../filesCards/php.md');
         $phpMd = file_get_contents($this->getParameter('symfony.md.file'));
 
         //split chaque contenue de fichier par ***
@@ -29,4 +31,11 @@ final class HomeController extends AbstractController
             'card' => $splitPhpMd[$choiceCard],
         ]);
     }
+
+    #[Route('/update', name: 'app_update')]
+    public function update(Filesystem $filesystem): Response 
+    {
+        //$filesystem->touch()
+        return $this->redirectToRoute('app_home');
+    } 
 }
