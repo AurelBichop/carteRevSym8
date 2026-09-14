@@ -24,7 +24,7 @@ final class HomeController extends AbstractController
         //Recuperer les fichier .md
         //$this->filesystem->exists('../filesCards/php.md'))
         //$phpMd = $this->filesystem->readFile('../filesCards/php.md');
-        $fileMD = $markDownFileRepository->findOneBy(['name'=>'PHP']) ?? (new MarkDownFile);
+        $fileMD = $markDownFileRepository->findOneBy(['name'=>'Php']) ?? (new MarkDownFile);
         $phpMd = $fileMD->getContent();
 
         //split chaque contenue de fichier par ***
