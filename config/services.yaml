@@ -9,9 +9,9 @@
 parameters:
     separator.string: '***'
 
-    twig.md.file: '%env(TWIG_FILE)%'
-    php.md.file: '%env(PHP_FILE)%'
-    symfony.md.file: '%env(SYMFO_COMPONENT_FILE)%'
+    twig.md.url.file: '%env(TWIG_URL_FILE)%'
+    php.md.url.file: '%env(PHP_URL_FILE)%'
+    symfony.md.url.file: '%env(SYMFO_COMPONENT_URL_FILE)%'
 
 services:
     # default configuration for services in *this* file
