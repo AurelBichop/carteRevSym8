@@ -14,7 +14,7 @@
           {{ card | raw }}
       {% endapply %}
 
-      <a href="{{ path('app_home') }}" class="btn btn-primary float-end">Suivante</a>
+      <a href="{{ path('app_home',{'categorie': next }) }}" class="btn btn-primary float-end">Suivante</a>
     </div>
   </div>
 

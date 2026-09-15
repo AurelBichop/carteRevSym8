@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MarkDownFileRepository::class)]
 class MarkDownFile
 {
-    const NAMES = ['Php', 'Twig', 'Sym'];
+    const NAMES = ['Php', 'Twig', 'Symfony'];
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -1,9 +1,15 @@
 <ul class="nav nav-pills card-header-pills">
     <li class="nav-item">
-        <a class="nav-link active" href="#">Tous</a>
+        <a class="nav-link active" href="{{ path('app_home')}}">Tous</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="{{ path('app_home',{'categorie':'Symfony'})}}">symfony</a>
+    </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_home',{'categorie':'Twig'})}}">Twig</a>
+    </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_home',{'categorie':'Php'})}}">Php</a>
     </li>
         <li class="nav-item">
         <a class="nav-link" href="{{ path('app_update')}}">Update</a>
