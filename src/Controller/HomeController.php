@@ -46,6 +46,7 @@ final class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'card' => $splitMd[$choiceCard],
             'next' => $categorie,
+            'nb_cards'=> count($splitMd),
         ]);
     }
     
@@ -59,6 +60,7 @@ final class HomeController extends AbstractController
         return $this->render('home/all.html.twig',[
             'cards' => $cards,
             'next' => $categorie,
+            'nb_cards' => count($cards),
         ]);
     }
 

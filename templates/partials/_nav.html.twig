@@ -1,4 +1,6 @@
 <ul class="nav nav-pills card-header-pills">
+    <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger">{{ nb_cards }}</span>
+
     <li class="nav-item">
         <a class="nav-link {% if next is null %}active{% endif %}" href="{{ path('app_home')}}">Toutes</a>
     </li>
