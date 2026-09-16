@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\MarkDownFile;
 use App\Repository\MarkDownFileRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +21,7 @@ final class HomeController extends AbstractController
     {
     }
 
-    #[Route('/{categorie}', name: 'app_home', defaults: ['categorie' => null])]
+    #[Route('/{categorie}', name: 'app_home', defaults: ['categorie' => null], priority:-5)]
     public function index(string|null $categorie): Response
     {
         $contentMd = "";        
@@ -37,30 +36,34 @@ final class HomeController extends AbstractController
             }
         }else
         {
-            $categorie = ucfirst($categorie);
-            if(in_array($categorie, MarkDownFile::NAMES))
-            {
-                $contentMd = $this->markDownFileRepository->findOneBy(['name'=>$categorie])->getContent();
-            }else{
-                throw new HttpException(404,'catégorie qui n\'existe pas');
-            }
+            $contentMd = $this->checkCategorie($categorie);
         }
 
-        //split chaque contenue de fichier par ***
-        $separator = $this->getParameter('separator.string');
-        $splitMd = explode($separator, $contentMd);
-        
         //Tirage au sort
+        $splitMd = $this->splitMd($contentMd);
         $choiceCard = array_rand($splitMd);
  
-
         return $this->render('home/index.html.twig', [
             'card' => $splitMd[$choiceCard],
             'next' => $categorie,
         ]);
     }
+    
+    #[Route('/all/{categorie}', name: 'app_all')]
+    public function allCard(string $categorie)
+    {
+        $cards = $this->splitMd($this->checkCategorie($categorie));
 
-    #[Route('/update', name: 'app_update', priority:10)]
+        shuffle($cards);
+
+        return $this->render('home/all.html.twig',[
+            'cards' => $cards,
+            'next' => $categorie,
+        ]);
+    }
+
+
+    #[Route('/update', name: 'app_update')]
     public function update(MarkDownFileRepository $markDownFileRepository): Response 
     {
         foreach(MarkDownFile::NAMES as $name){
@@ -85,5 +88,22 @@ final class HomeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_home');
-    } 
+    }
+
+
+    private function checkCategorie(string $categorie): string | HttpException
+    {
+        if(in_array(ucfirst($categorie), MarkDownFile::NAMES))
+        {
+            return $this->markDownFileRepository->findOneBy(['name'=>$categorie])->getContent();
+        }else{
+            throw new HttpException(404,'catégorie qui n\'existe pas');
+        }
+    }
+
+    //split chaque contenue de fichier par ***
+    private function splitMd(string $contentMd): array 
+    { 
+        return explode($this->getParameter('separator.string'), $contentMd);
+    }
 }

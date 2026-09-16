@@ -1,20 +1,20 @@
 <ul class="nav nav-pills card-header-pills">
     <li class="nav-item">
-        <a class="nav-link active" href="{{ path('app_home')}}">Tous</a>
+        <a class="nav-link {% if next is null %}active{% endif %}" href="{{ path('app_home')}}">Toutes</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_home',{'categorie':'Symfony'})}}">symfony</a>
-    </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_home',{'categorie':'Twig'})}}">Twig</a>
-    </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_home',{'categorie':'Php'})}}">Php</a>
-    </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_update')}}">Update</a>
+        <a class="nav-link {% if next == 'Symfony' %}active{% endif %}" href="{{ path('app_home',{'categorie':'Symfony'})}}">Symfony</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
+        <a class="nav-link {% if next == 'Twig' %}active{% endif %}" href="{{ path('app_home',{'categorie':'Twig'})}}">Twig</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link {% if next == 'Php' %}active{% endif %}" href="{{ path('app_home',{'categorie':'Php'})}}">Php</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-black btn btn-warning" href="{{ path('app_update')}}">Mise à jour des cartes</a>
+    </li>
+    <div class="ms-auto">    
+        <a class="btn btn-danger" href="{{ path('app_logout') }}">Deconnexion</a>
+    </div>
 </ul>

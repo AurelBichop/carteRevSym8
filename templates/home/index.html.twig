@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Carte de révision!{% endblock %}
+{% block title %}Cartes de révisions !{% endblock %}
 
 {% block body %}
 
@@ -14,6 +14,9 @@
           {{ card | raw }}
       {% endapply %}
 
+      {% if next is not null %}
+        <a href="{{ path('app_all',{'categorie': next }) }}" class="btn btn-secondary float">Voir toutes les cartes</a>
+      {% endif %}
       <a href="{{ path('app_home',{'categorie': next }) }}" class="btn btn-primary float-end">Suivante</a>
     </div>
   </div>
